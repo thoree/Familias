@@ -1,0 +1,16 @@
+Package: Familias
+Type: Package
+Title: Probabilities for Pedigrees Given DNA Data
+Version: 2.5
+Date: 2016-9-25
+Author: Petter Mostad, Thore Egeland, Ivar Simonsson
+Maintainer: Petter Mostad <mostad@chalmers.se>, Thore Egeland <Thore.Egeland@nmbu.no>
+Depends: R (>= 1.8.0), kinship2, Rsolnp
+Description: 
+ An interface to the core Familias functions (www.familias.name), 
+ which are programmed in C++.
+License: GPL-2
+LazyLoad: yes
+URL: http://www.familias.name, http://www.familias.no
+NeedsCompilation: yes
+
