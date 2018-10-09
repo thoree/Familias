@@ -311,6 +311,12 @@ FamiliasLocus <- function (frequencies, allelenames, name,
         if (any(round(v - v[1], 6) != 0)) 
             simpleMutationMatrices <- FALSE
     }
+    if(nAlleles == 1){
+      femaleMutationMatrix[1,1] = 1
+      maleMutationMatrix[1,1] = 1
+      print("Mutation matrices set to 1 with 1 allele")
+      cat("\n")
+    }
     result <- list(locusname = name, alleles = frequencies, femaleMutationType = femaleMutationType, 
         femaleMutationMatrix = validateMutation(femaleMutationMatrix), maleMutationType = maleMutationType, 
         maleMutationMatrix = validateMutation(maleMutationMatrix), simpleMutationMatrices = simpleMutationMatrices, 
