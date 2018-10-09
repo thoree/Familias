@@ -312,12 +312,25 @@ FamiliasLocus <- function (frequencies, allelenames, name,
             simpleMutationMatrices <- FALSE
     }
     result <- list(locusname = name, alleles = frequencies, femaleMutationType = femaleMutationType, 
-        femaleMutationMatrix = femaleMutationMatrix, maleMutationType = maleMutationType, 
-        maleMutationMatrix = maleMutationMatrix, simpleMutationMatrices = simpleMutationMatrices, 
-	Stabilization = Stabilization)
+        femaleMutationMatrix = validateMutation(femaleMutationMatrix), maleMutationType = maleMutationType, 
+        maleMutationMatrix = validateMutation(maleMutationMatrix), simpleMutationMatrices = simpleMutationMatrices, 
+        Stabilization = Stabilization)
     class(result) <- "FamiliasLocus"
     result
 }
+
+validateMutation = function(mutmat){
+  if (any(mutmat < 0) || any(mutmat > 1)) 
+    stop(paste("The mutation matrix must have entries in [0,1]"))
+  rs = rowSums(mutmat)
+  if (any(round(rs, 3) != 1)) {
+    print(rowSums(mutmat))
+    stop("Rows which do not sum to 1 (after rounding to 3 decimal places): ", 
+          which(round(rs, 3) != 1))
+  }
+  mutmat
+}
+ 
 
 stabilize = function(M,pe,stabilizationMethod="DP",t=1){
   #library('Rsolnp')
