@@ -9,7 +9,7 @@ The information represents allele frequencies for a range of different markers b
 a data base in Norway. 
 }
 \usage{
-NorwegianFrequencies
+data(NorwegianFrequencies)
 }
 %- maybe also 'usage' for other objects documented here.
 \format{
