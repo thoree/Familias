@@ -56,12 +56,13 @@ FamiliasPosterior <- function (pedigrees, loci, datamatrix, prior, ref = 1, kins
                 i))
         }
             
-        if ((i > 1) && (j<=npersDatamatrixOriginal)) {
-            firstObseredInPed <- 1
-            while(pedPersonIndicesByDmPersonIndex[j,firstObseredInPed]==0) firstObseredInPed <- firstObseredInPed + 1
+        if (i > 1) {
+            firstObservedInPed <- 1
+            while(pedPersonIndicesByDmPersonIndex[j,firstObservedInPed]==0) firstObservedInPed <- firstObservedInPed + 1
             
-            if (pedigrees[[i]]$sex[pedPersonIndicesByDmPersonIndex[j, i]] != 
-                pedigrees[[firstObseredInPed]]$sex[pedPersonIndicesByDmPersonIndex[j, firstObseredInPed]]) 
+            if ((pedigrees[[i]]$sex[pedPersonIndicesByDmPersonIndex[j, i]] > 0) &&
+                (pedigrees[[i]]$sex[pedPersonIndicesByDmPersonIndex[j, i]] != 
+                pedigrees[[firstObservedInPed]]$sex[pedPersonIndicesByDmPersonIndex[j, firstObservedInPed]])) 
                 stop("Persons common to all pedigrees must have the same sex in all pedigrees!")
         }
     }
