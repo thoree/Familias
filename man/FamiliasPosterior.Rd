@@ -133,4 +133,73 @@ locus1 <- FamiliasLocus(c(0.1, 0.2, 0.3, 0.4), c("A", "B", "C", "D"), "locus1",
 datamatrix <- data.frame(locus1.1 = c("A", "A", "C"), locus1.2 = c("B", "A", "C"))
 rownames(datamatrix) <- persons
 result <- FamiliasPosterior(mypedigrees, locus1, datamatrix)
+
+#Example 4: Adding an untyped ancestor affects the likelihood
+#when subpopulation correction is used even if the mutation matrix is stationary
+
+# ped1 is son by himself
+ped1 <- FamiliasPedigree(id="son", 
+                         dadid = c(NA), 
+                         momid = c(NA), 
+                         sex="male")
+
+# ped2 describes son with parents
+persons <- c("son", "mother", "AF")
+sex <- c("male", "female", "male")
+ped2 <- FamiliasPedigree(id=persons, 
+                         dadid = c("AF", NA, NA), 
+                         momid = c("mother", NA, NA), 
+                         sex=sex)
+
+# only the son is typed
+datamatrix <- matrix(c("A","A"), ncol=2)
+rownames(datamatrix) <- "son"
+
+f <- setNames(c(0.3, 0.7), c("A", "B"))
+
+locus1 <- FamiliasLocus(f, 
+                        MutationModel = "Proportional", 
+                        MutationRate = 1e-2)
+
+# if Fst=0, then ped1 and ped2 are equivalent
+pr_ped1_HW <- FamiliasPosterior(list(ped1), locus1, datamatrix)$likelihoods
+pr_ped2_HW <- FamiliasPosterior(list(ped2), locus1, datamatrix)$likelihoods
+
+# verify calculations by hand
+stopifnot(all.equal(pr_ped1_HW, pr_ped2_HW))
+stopifnot(all.equal(pr_ped1_HW, as.numeric(f["A"]^2)))
+stopifnot(all.equal(pr_ped2_HW, as.numeric(f["A"]^2)))
+
+# if Fst>0, then ped1 and ped2 are not equivalent
+Fst <- 0.03
+
+pr_ped1_Fst <- FamiliasPosterior(list(ped1), locus1, datamatrix, kinship = Fst)$likelihoods
+pr_ped2_Fst <- FamiliasPosterior(list(ped2), locus1, datamatrix, kinship = Fst)$likelihoods
+
+# pr_ped1_Fst and pr_ped2_Fst should not be equal: stop if equal
+stopifnot(!isTRUE(all.equal(pr_ped1_Fst, pr_ped2_Fst)))
+
+# compute pr_ped1_Fst by hand to verify the result
+pr_ped1_Fst_manual <- as.numeric(f["A"]*Fst + f["A"]^2 * (1-Fst))
+stopifnot(all.equal(pr_ped1_Fst, pr_ped1_Fst_manual))
+
+# compute pr_ped2_Fst by hand to verify the result
+# computing Pr(son=A,A|ped2) with subpopulation correction and mutations
+# requires an explicit sum over the two parental alleles
+
+pr_AA <- as.numeric(f["A"]*Fst + f["A"]^2 * (1-Fst))
+pr_AB <- 2 * as.numeric(f["A"]*f["B"] * (1-Fst))
+pr_BB <- as.numeric(f["B"]*Fst + f["B"]^2 * (1-Fst))
+
+M <- locus1$maleMutationMatrix
+
+pr_AA_given_AA <- M["A","A"]^2
+pr_AA_given_AB <- M["A","A"] * M["B","A"]
+pr_AA_given_BB <- M["B","A"]^2
+
+pr_ped2_Fst_manual <- pr_AA*pr_AA_given_AA +pr_AB*pr_AA_given_AB + pr_BB*pr_AA_given_BB
+
+stopifnot(all.equal(pr_ped2_Fst, pr_ped2_Fst_manual))
+
+
 }

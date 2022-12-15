@@ -23,38 +23,66 @@ FamiliasPosterior <- function (pedigrees, loci, datamatrix, prior, ref = 1, kins
         stop("The prior must consist of non-negative numbers summing to 1.")
     if (missing(datamatrix)) 
         stop("The datamatrix must be supplied.")
-    persons <- rownames(datamatrix)
-    if (length(persons) < 1) 
+    if (length(rownames(datamatrix)) < 1) 
         stop("The row names of the datamatrix must contain the names of the persons you have data for.")
-    npers <- length(persons)
-    indextable <- matrix(0, npers, npeds)
-    firstped <- pedigrees[[1]]
-    for (i in 1:npeds) for (j in 1:npers) {
-        indextable[j, i] <- match(persons[j], pedigrees[[i]]$id, 
+    
+    # ensure untyped persons in the pedigree are present in the datamatrix if kinship>0
+    # because pruning those persons would affect the likelihood if mutations are possible
+    npersDatamatrixOriginal <- nrow(datamatrix)
+    if (kinship>0){
+        pedigreePersons <- unique(unlist(lapply(pedigrees, function(x) x$id)))
+        
+        personsToAdd <- pedigreePersons[!pedigreePersons %in% rownames(datamatrix)]
+
+        datamatrixBlanks <- matrix(NA, nrow = length(personsToAdd),
+                                    ncol = ncol(datamatrix),
+                                    dimnames = list(personsToAdd))
+        
+        datamatrix <- rbind(datamatrix, datamatrixBlanks)
+    }
+    
+    personsDatamatrix <- rownames(datamatrix)
+    
+    npersDatamatrix <- length(personsDatamatrix)
+    pedPersonIndicesByDmPersonIndex <- matrix(0, npersDatamatrix, npeds)
+    
+    for (i in 1:npeds) for (j in 1:npersDatamatrix) {
+        pedPersonIndicesByDmPersonIndex[j, i] <- match(personsDatamatrix[j], pedigrees[[i]]$id, 
             nomatch = 0)
-        if (indextable[j, i] == 0) 
-            stop(paste("Error: Person ", persons[j], "of the data matrix does not occur in pedigree", 
+        if (pedPersonIndicesByDmPersonIndex[j, i] == 0 && 
+            (!all(is.na(datamatrix[j,])))) 
+        {
+            stop(paste("Error: Person ", personsDatamatrix[j], "of the data matrix is typed and does not occur in pedigree", 
                 i))
+        }
+            
         if (i > 1) {
-            if (pedigrees[[i]]$sex[indextable[j, i]] != firstped$sex[indextable[j, 
-                1]]) 
+            firstObservedInPed <- 1
+            while(pedPersonIndicesByDmPersonIndex[j,firstObservedInPed]==0) firstObservedInPed <- firstObservedInPed + 1
+            
+            if ((pedigrees[[i]]$sex[pedPersonIndicesByDmPersonIndex[j, i]] > 0) &&
+                (pedigrees[[i]]$sex[pedPersonIndicesByDmPersonIndex[j, i]] != 
+                pedigrees[[firstObservedInPed]]$sex[pedPersonIndicesByDmPersonIndex[j, firstObservedInPed]])) 
                 stop("Persons common to all pedigrees must have the same sex in all pedigrees!")
         }
     }
     .C("NewFamilias")
-    for (j in 1:npers) {
-        result <- .C("AddPerson", as.integer(!(firstped$sex[indextable[j, 
-            1]] == "female")), as.integer(-1), as.integer(FALSE), 
+    for (j in 1:npersDatamatrix) {
+        iPed <- 1
+        while(pedPersonIndicesByDmPersonIndex[j,iPed]==0) iPed <- iPed + 1
+        
+        result <- .C("AddPerson", as.integer(!(pedigrees[[iPed]]$sex[pedPersonIndicesByDmPersonIndex[j, 
+            iPed]] == "female")), as.integer(-1), as.integer(FALSE), 
             index = integer(1), error = integer(1))
         if (result$error > 0) 
             stop("ERROR: Problems with common persons in pedigree.")
     }
     for (i in pedigrees) {
-        nPersons <- length(i$sex)
-        neworder <- rep(0, nPersons)
+        nPersonsPed <- length(i$sex)
+        neworder <- rep(0, nPersonsPed)
         nExMales <- nExFemales <- 0
-        for (j in 1:nPersons) {
-            mm <- match(i$id[j], persons, nomatch = 0)
+        for (j in 1:nPersonsPed) {
+            mm <- match(i$id[j], personsDatamatrix, nomatch = 0)
             if (mm > 0) 
                 neworder[j] <- mm
             else if (i$sex[j] == "female") {
@@ -66,11 +94,11 @@ FamiliasPosterior <- function (pedigrees, loci, datamatrix, prior, ref = 1, kins
                 neworder[j] <- nExMales
             }
         }
-        for (j in 1:nPersons) {
-            if (!(i$id[j] %in% persons)) {
+        for (j in 1:nPersonsPed) {
+            if (!(i$id[j] %in% personsDatamatrix)) {
                 if (i$sex[j] == "female") 
-                  neworder[j] <- neworder[j] + npers
-                else neworder[j] <- neworder[j] + npers + nExFemales
+                  neworder[j] <- neworder[j] + npersDatamatrix
+                else neworder[j] <- neworder[j] + npersDatamatrix + nExFemales
             }
         }
         result <- .C("AddPedigree", as.integer(nExFemales), as.integer(nExMales), 
@@ -78,7 +106,7 @@ FamiliasPosterior <- function (pedigrees, loci, datamatrix, prior, ref = 1, kins
         if (result$error > 0) 
             stop("ERROR: Wrong input in pedigrees.")
         index <- result$index + 1
-        for (j in 1:nPersons) {
+        for (j in 1:nPersonsPed) {
             if (i$findex[j] > 0) {
                 result <- .C("AddRelation", as.integer(neworder[i$findex[j]] - 
                   1), as.integer(neworder[j] - 1), as.integer(index - 
@@ -164,7 +192,7 @@ FamiliasPosterior <- function (pedigrees, loci, datamatrix, prior, ref = 1, kins
     if (dim(datamatrix)[2] != 2 * nloci) 
         stop("The datamatrix must have two columns for each locus.")
     for (i in 1:nloci) {
-        for (j in 1:npers) {
+        for (j in 1:npersDatamatrix) {
             A1 <- datamatrix[j, 2 * i - 1]
             A2 <- datamatrix[j, 2 * i]
             if (!(is.na(A1) && is.na(A2))) {
