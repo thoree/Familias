@@ -1,2 +1,12 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+commands.R
+README.Rmd
+README_cache
+^data-raw$
+^Rprof.out$
+^R/unused
+^cran-comments\.md$
+^CRAN-SUBMISSION$
+^revdep$
+
