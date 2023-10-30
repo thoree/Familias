@@ -139,7 +139,7 @@ FamiliasLocus <- function (frequencies, allelenames, name,
                 stop("The 'Stepwise' mutation model requires all non-silent alleles to have numerical names.")
             if (any(round(numfreq, 1)!=numfreq))
                 stop("Microvariants must be named as a decimal number with one decimal.")
-            microgroup <- (numfreq - round(numfreq))*10
+            microgroup <- round((numfreq - round(numfreq))*10) #Bug fixed 2023-10-30
             for (i in 1:nAll) {
                 microcompats <- (microgroup == microgroup[i])
                 for (j in 1:nAll) {
@@ -213,7 +213,7 @@ FamiliasLocus <- function (frequencies, allelenames, name,
                 stop("The 'Stepwise' mutation model requires all non-silent alleles to have numerical names.")
             if (any(round(numfreq, 1)!=numfreq))
                 stop("Microvariants must be named as a decimal number with one decimal.")
-            microgroup <- (numfreq - round(numfreq))*10
+            microgroup <- round((numfreq - round(numfreq))*10) # #Bug fixed 2023-10-30
             for (i in 1:nAll) {
                 microcompats <- (microgroup == microgroup[i])
                 for (j in 1:nAll) {
