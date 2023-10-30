@@ -2,11 +2,11 @@ FamiliasPrior <- function (pedigrees, generationsParameter = 1, inbreedingParame
 {
    if (missing(pedigrees) || length(pedigrees)<1)
       stop("The pedigrees parameter must be an object of type 'pedigree' or 'FamiliasPedigree', or a list of such.") 
-   if (class(pedigrees)=="pedigree" | class(pedigrees)=="FamiliasPedigree") pedigrees <- list(pedigrees)
-   if (class(pedigrees)!="list")
+   if (inherits(pedigrees,"pedigree") | inherits(pedigrees, "FamiliasPedigree")) pedigrees <- list(pedigrees)
+   if (!inherits(pedigrees, "list"))
       stop("The pedigrees parameter must be an object of type 'pedigree' or 'FamiliasPedigree', or a list of such.") 
    for (i in pedigrees) {
-       if (class(i)!="pedigree" && class(i)!="FamiliasPedigree")
+       if (!inherits(class, "pedigree") && !inherits(i, "FamiliasPedigree"))
           stop("The pedigrees parameter must be an object of type 'pedigree' or 'FamiliasPedigree', or a list of such.") 
    }
    npeds <- length(pedigrees)

@@ -19,7 +19,7 @@ FamiliasLocus <- function (frequencies, allelenames, name,
 {
     if (missing(frequencies)) 
         stop("The first argument must be a list of frequencies or a FamiliasLocus object.")
-    if(class(frequencies)=="FamiliasLocus") {
+    if(inherits(frequencies, "FamiliasLocus")) {
         if (!missing(name) || !missing(allelenames))
             stop("Only mutation parameters can be edited with the FamiliasLocus function.")
         x <- frequencies

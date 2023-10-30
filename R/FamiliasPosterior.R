@@ -3,13 +3,12 @@ FamiliasPosterior <- function (pedigrees, loci, datamatrix, prior, ref = 1, kins
 {
     if (missing(pedigrees) || length(pedigrees) < 1) 
         stop("The pedigrees parameter must be an object of type 'pedigree' or 'FamiliasPedigree', or a list of such.")
-    if (class(pedigrees) == "pedigree" | class(pedigrees) == 
-        "FamiliasPedigree") 
+    if (inherits(pedigrees, "pedigree") | inherits(pedigrees,"FamiliasPedigree") )
         pedigrees <- list(pedigrees)
-    if (class(pedigrees) != "list") 
+    if (!inherits(pedigrees,"list")) 
         stop("The pedigrees parameter must be an object of type 'pedigree' or 'FamiliasPedigree', or a list of such.")
     for (i in pedigrees) {
-        if (class(i) != "pedigree" && class(i) != "FamiliasPedigree") 
+        if (!inherits(i, "pedigree") && !inherits(i, "FamiliasPedigree"))
             stop("The pedigrees parameter must be an object of type 'pedigree' or 'FamiliasPedigree', or a list of such.")
     }
     npeds <- length(pedigrees)
@@ -133,14 +132,14 @@ FamiliasPosterior <- function (pedigrees, loci, datamatrix, prior, ref = 1, kins
     }
     if (missing(loci) || length(loci) < 1) 
         stop("The loci argument must be a FamiliasLocus object or a list of such.")
-    if (class(loci) == "FamiliasLocus") 
+    if (inherits(loci, "FamiliasLocus")) 
         loci <- list(loci)
-    if (class(loci) != "list") 
+    if (!inherits(loci,"list") )
         stop("The loci argument must be a FamiliasLocus object or a list of such.")
     nloci <- length(loci)
     nms <- rep("", nloci)
     for (i in 1:nloci) {
-        if (class(loci[[i]]) != "FamiliasLocus") 
+        if (!inherits(loci[[i]], "FamiliasLocus")) 
             stop("The loci argument must be a FamiliasLocus object or a list of such.")
         nms[i] <- loci[[i]]$locusname
     }
