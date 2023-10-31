@@ -154,7 +154,7 @@ Petter Mostad mostad@chalmers.se, Thore Egeland Thore.Egeland@nmbu.com, and Ivar
 }
 \references{
 Egeland, Kling, Mostad: Relationship Inference with Familias and R.
-(Academic press, 2016, \url{http://www.familias.name/book.html}).
+(Academic press, 2016, \url{https://www.familias.name/book.html}).
 Simonsson, Mostad: Stationary Mutation models. (FSI: Genetics, 2016).
 }
 
