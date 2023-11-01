@@ -62,7 +62,7 @@ char* getNamePrefix(int nNames, char** names)
    int i; 
    for (;;)
    {
-      sprintf(result, "E%d", ++counter); 
+      snprintf(result, 100, "E%d", ++counter); 
       for (i=0; i<nNames; i++)
 	 if (strncmp(names[i], result, strlen(result))==0) break; 
       if (i==nNames) return result;

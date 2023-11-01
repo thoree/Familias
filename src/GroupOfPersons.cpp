@@ -87,8 +87,8 @@ void GroupOfPersons::readData(ifstream& is)
 	 allNames[i] = namesChildren[i-nWomen-nMen]; 
       else
       {
-	 allNames[i] = new char[100]; 
-	 sprintf(allNames[i], "EXTRA%d", i+1); 
+	 allNames[i] = new char[100];
+	 snprintf(allNames[i], 100, "EXTRA%d", i+1); 
       }
    }
    male = new int[nTotal]; 
