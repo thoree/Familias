@@ -2,14 +2,14 @@
 \alias{FamiliasPedigree}
 
 \title{
-Creates an object storing a pedigree.  
+Creates an object storing a pedigree  
 }
 \description{
 Creates and stores an object containing a pedigree in much the same way as the 'pedigree' 
 function of the 'kinship2' package. It is checked that the input represents a correct pedigree. 
 The main differences is that a person is allowed to have one parent present and one absent in the pedigree. 
 Another difference is that no disease parameters are included. 
-The result is an object with class \code{FamiliasPedigree}
+The result is an object with class \code{FamiliasPedigree}.
 }
 \usage{
 FamiliasPedigree(id, dadid, momid, sex)
@@ -44,10 +44,10 @@ mutation model. The \code{FamiliasPosterior} and \code{FamiliasPrior} functions 
 }
 \value{
 A list of class \code{FamiliasPedigree} containing 
-\item{id}{The same vector as the id input}
+\item{id}{The same vector as the id input.}
 \item{findex}{A vector of indices of fathers of persons. Zero indicates that the person has no father in the pedigree.}
 \item{mindex}{A vector of indices of mothers of persons. Zero indicates that the person has no mother in the pedigree.}
-\item{sex}{The same vector as the sex input}
+\item{sex}{The same vector as the sex input.}
 }
 \author{
 Petter Mostad mostad@chalmers.se

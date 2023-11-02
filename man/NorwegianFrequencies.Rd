@@ -2,7 +2,7 @@
 \alias{NorwegianFrequencies}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-A list of markers with allele names and frequencies. 
+A list of markers with allele names and frequencies 
 }
 \description{
 The information represents allele frequencies for a range of different markers based on 
@@ -24,7 +24,6 @@ and East Asian and Middle Asian population and simuation of adequate database si
 International: Genetics Supplement Series, Volume 4, issue 1, 2013}
 }
 \examples{
-require(Familias)
 data(NorwegianFrequencies)
 
 #Displaying the Norwegian frequencies of the 

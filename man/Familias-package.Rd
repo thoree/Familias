@@ -11,14 +11,6 @@ The core code of the Windows program, available from
 \url{https://familias.no}, is contained in this R package. 
 }
 \details{
-\tabular{ll}{
-Package: \tab Familias\cr
-Type: \tab Package\cr
-Version: \tab 2.5\cr
-Date: \tab 2018-09-25\cr
-License: \tab GPL-2\cr
-LazyLoad: \tab yes\cr
-}
 This package represents an implementation of an interface to the 
 core Familias functions, which are programmed in C++. 
 The previous version, 2.4., loaded the R library paramlink for some examples.
@@ -30,7 +22,7 @@ for creating, manipulating and visualizing pedigrees with or without marker data
 Petter Mostad <mostad@chalmers.se> and Thore Egeland <Thore.Egeland@nmbu.no>
 }
 \references{
-For more information, see \url{www.familias.name}.
+For more information, see \url{https://familias.name/}.
 }
 \keyword{ package }
 \examples{
@@ -45,11 +37,11 @@ ped3 <- FamiliasPedigree(id = c(persons, "TF", "gf", "gm"),
 dadid <- c(NA, "TF", "gf", "gf", NA, NA), 
 momid <- c(NA, "mother", "gm", "gm", NA, NA), 
 sex <- c("female", "female", "male", "male", "male", "female"))
-par(mfrow <- c(3,1))
-plot(ped1);title("ped1, i.e., AF is father")
-plot(ped2);title("ped2, i.e., AF is unrelated")
-plot(ped3);title("ped3, i.e., AF is uncle")
-par(mfrow <- c(1,1))
+# par(mfrow = c(3,1))
+# plot(ped1);title("ped1, i.e., AF is father")
+# plot(ped2);title("ped2, i.e., AF is unrelated")
+# plot(ped3);title("ped3, i.e., AF is uncle")
+# par(mfrow = c(1,1))
 mypedigrees <- list(isFather = ped1, unrelated=ped2, isUncle = ped3)
 locus1 <- FamiliasLocus(frequencies = c(0.1, 0.2, 0.3, 0.4), 
 allelenames <- c("A", "B", "C", "D"), name="locus1")

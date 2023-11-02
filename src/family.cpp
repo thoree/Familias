@@ -117,6 +117,7 @@ int family::remove_person(int male, char* name, person*& q,
 {
    q = get_person(name);
    if (q) 
+   {
       if (male==q->is_male()) 
       {
 	 if (q==p) p = p->get_next();
@@ -150,6 +151,7 @@ int family::remove_person(int male, char* name, person*& q,
 	 delete[] name;
 	 return 0;
       }
+   }
 // Removed 2012-03-08
 //   if (info>0)
 //      cout<<"ERROR: The person \""<<name<<"\" could not be found.\n";

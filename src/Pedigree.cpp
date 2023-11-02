@@ -40,10 +40,12 @@ Pedigree::Pedigree(int nNamedPers,
       mother[i] = -1; 
       for (j=0; j<nTotal; j++)
 	 if (par[j+i*nTotal])
+	 {
 	    if (male[j]) 
 	       father[i] = j; 
 	    else 
 	       mother[i] = j; 
+	 }
    }
 }
 

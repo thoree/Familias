@@ -14,10 +14,10 @@ kinship = 0, simplifyMutations = FALSE)
 
 \arguments{
   \item{pedigrees}{
-An object of type 'FamiliasPedigree' or 'pedigree', or a list of such objects
+An object of type 'FamiliasPedigree' or 'pedigree', or a list of such objects.
 }
   \item{loci}{
-A FamiliasLocus object or a list of such objects
+A FamiliasLocus object or a list of such objects.
 }
   \item{datamatrix}{
 A data frame. The row names must be the names of the persons you have data for. The columns contain
@@ -46,12 +46,12 @@ of the alleles not observed in the data.
 }
 }
 \value{
-\item{posterior}{probabilities for each pedigree}
-\item{prior}{prior returned for convenience and backward compatibility}
-\item{LR}{Likelihood ratios using the pedigree indicated with the ref parameter (default value 1) as basis}
-\item{LRperMarker}{Likelihood ratios per marker using the pedigree indicated with the ref parameter (default value 1) as basis}
-\item{likelihoods}{for each pedigree}
-\item{likelihoodsPerSystem}{likelihoods for each locus and each pedigree}
+\item{posterior}{probabilities for each pedigree.}
+\item{prior}{prior returned for convenience and backward compatibility.}
+\item{LR}{Likelihood ratios using the pedigree indicated with the ref parameter (default value 1) as basis.}
+\item{LRperMarker}{Likelihood ratios per marker using the pedigree indicated with the ref parameter (default value 1) as basis.}
+\item{likelihoods}{for each pedigree.}
+\item{likelihoodsPerSystem}{likelihoods for each locus and each pedigree.}
 }
 
 \author{
@@ -79,7 +79,7 @@ ped3 <- FamiliasPedigree(id = c(persons, "TF", "gf", "gm"),
 dadid = c(NA, "TF", "gf", "gf", NA, NA), 
 momid = c(NA, "mother", "gm", "gm", NA, NA), 
 sex = c("female", "female", "male", "male", "male", "female"))
-par(mfrow=c(3,1))
+par(mfrow = c(3,1))
 plot(ped1);title("ped1, i.e., AF is father")
 plot(ped2);title("ped2, i.e., AF is unrelated")
 plot(ped3);title("ped3, i.e., AF is uncle")

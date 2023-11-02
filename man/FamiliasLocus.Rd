@@ -2,7 +2,7 @@
 \alias{FamiliasLocus}
 
 \title{
-Creates an object with information on a locus, including its mutation matrices. 
+Creates an object with information on a locus, including its mutation matrices 
 }
 \description{
 The user provides input needed to define an autosomal locus (also called system or forensic marker) to be used for pedigree calculations.
@@ -138,7 +138,7 @@ and all allele names are integers, the resulting model is referred to as
 }
 \value{
 A list of class \code{FamiliasLocus} containing 
-\item{locusname}{The name of the locus}
+\item{locusname}{The name of the locus.}
 \item{alleles}{The frequencies of the alleles. The names of the alleles are included as the vector names.}
 \item{femaleMutationType}{A string specifying the type of the female mutations.}
 \item{femaleMutationMatrix}{The mutation matrix used for female transfer.}
@@ -149,13 +149,11 @@ allele is always independent of which allele the mutation happens from.
 If this is true, some likelihood computations can be done faster.}
 \item{Stabilization}{The stabilization method used.}
 }
-\author{
-Petter Mostad mostad@chalmers.se, Thore Egeland Thore.Egeland@nmbu.com, and Ivar Simonsson Ivar simonssi@chalmers.se 
-}
+
 \references{
 Egeland, Kling, Mostad: Relationship Inference with Familias and R.
 (Academic press, 2016, \url{https://www.familias.name/book.html}).
-Simonsson, Mostad: Stationary Mutation models. (FSI: Genetics, 2016).
+Simonsson, Mostad: Stationary Mutation models (FSI: Genetics, 2016).
 }
 
 \examples{

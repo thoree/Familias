@@ -11,10 +11,10 @@ Before conversion to a pedigree object, additional parents are added to the pedi
 }
 \arguments{
   \item{x}{
-An object of class FamiliasPedigree
+An object of class FamiliasPedigree,
 }
   \item{y}{
-Not used in this printing function
+Not used in this printing function.
 }
   \item{\dots}{
 Other arguments are transferred to the plot.pedigree function of the kinship2 package.  
@@ -22,7 +22,8 @@ Other arguments are transferred to the plot.pedigree function of the kinship2 pa
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
-Graphical parameters used in the plot.pedigree function may be input via the plot.FamiliasPedigree function. 
+Graphical parameters used in the plot.pedigree function may be input via the 
+plot.FamiliasPedigree function. 
 }
 \value{
 %%  ~Describe the value returned
@@ -36,7 +37,7 @@ A plot is produced.
 %%  ~~who you are~~
 Petter Mostad mostad@chalmers.se 
 }
-\seealso{ 'pedtools', \url{https://github.com/magnusdv/pedtools} }
+\seealso{\url{https://github.com/magnusdv/pedtools} }
 \examples{
 ped <- FamiliasPedigree(id = c("child", "AF"), momid = c(NA, NA), 
        dadid = c("AF", NA), sex = c("male", "male"))

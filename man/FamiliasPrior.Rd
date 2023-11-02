@@ -19,7 +19,7 @@ inbreedingParameter = 1, partnerParameter = 1, maxGenerations)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{pedigrees}{
-A list of objects of class either 'pedigree' or 'FamiliasPedigree'
+A list of objects of class either 'pedigree' or 'FamiliasPedigree'.
 }
   \item{generationsParameter}{
 Non-negative real. A value of 1 
@@ -29,21 +29,19 @@ for pedigrees with many generations.
   \item{inbreedingParameter}{
 Non-negative real. A pedigree is inbred if parents are related within the pedigree. 
 If 0, all inbred pedigrees are assigned a prior probability 0. A value of 1 
-indicates no influence of inbreeding. A value above 1 (below 1) increases (decreases) the prior
-for inbred pedigrees.
+indicates no influence of inbreeding. A value above 1 (below 1) increases (decreases) the prior for inbred pedigrees.
 }
   \item{partnerParameter}{
 Non-negative real (previously referred to as promiscuity parameter). If 0, all pedigrees
 where parents have children by different partners, are assigned prior 0. A value of 1 
-indicates no influence of the parameter. A value above 1 (below 1) increases (decreases) the prior
-for partners having children by different partners. 
+indicates no influence of the parameter. A value above 1 (below 1) increases (decreases) the prior for partners having children by different partners. 
 }
   \item{maxGenerations}{
 Integer giving the maximum number of generations; pedigrees with more generations than this are assigned a zero prior probability. 
 }
 }
 \details{
-See http://familias.name/manual.pdf for complete description of the parametric models implemented.
+See https://familias.name/manual.pdf for a complete description of the parametric models implemented.
 }
 \value{
 The prior, i.e., a vector of real numbers summing to 1.
@@ -54,21 +52,23 @@ Petter Mostad <mostad@chalmers.se> and Thore Egeland <Thore.Egeland@nmbu.com>
 }
 
 \examples{
-require(Familias)
 persons <- c("mother", "daughter", "AF")
-ped1 <- FamiliasPedigree(id = persons, dadid = c(NA, "AF", NA), momid = c(NA, "mother", NA),
- sex = c("female", "female", "male"))
+ped1 <- FamiliasPedigree(id = persons, dadid = c(NA, "AF", NA), 
+                         momid = c(NA, "mother", NA),
+                         sex = c("female", "female", "male"))
 ped2 <- FamiliasPedigree(id = c(persons, "TF"), dadid = c(NA, "TF", NA, NA), 
-momid = c(NA, "mother", NA, NA), 
-sex = c("female", "female", "male", "male"))
+momid <- c(NA, "mother", NA, NA), 
+sex <- c("female", "female", "male", "male"))
 ped3 <- FamiliasPedigree(id = c(persons, "TF", "gf", "gm"), 
-dadid  =  c(NA, "TF", "gf", "gf", NA, NA), 
-momid = c(NA, "mother", "gm", "gm", NA, NA), 
-sex = c("female", "female", "male", "male", "male", "female"))
+dadid  <-  c(NA, "TF", "gf", "gf", NA, NA), 
+momid <- c(NA, "mother", "gm", "gm", NA, NA), 
+sex <- c("female", "female", "male", "male", "male", "female"))
 mypedigrees <- list(isFather = ped1, unrelated = ped2, isUncle = ped3)
 FamiliasPrior(mypedigrees)
-granddad <- FamiliasPedigree(id = c(persons, "TF", "gm"), dadid = c(NA, "TF", NA, "AF", NA), 
-momid = c(NA, "mother", NA, "gm", NA), sex=c("female", "female", "male", "male", "female"))
+granddad <- FamiliasPedigree(id = c(persons, "TF", "gm"), 
+                             dadid = c(NA, "TF", NA, "AF", NA), 
+momid <- c(NA, "mother", NA, "gm", NA), 
+           sex = c("female", "female", "male", "male", "female"))
 FamiliasPrior(c(mypedigrees, list(granddad)))
 FamiliasPrior(c(mypedigrees, list(granddad)), maxGenerations = 1)
 }
