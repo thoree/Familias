@@ -5,6 +5,13 @@
 #include "odds.h"
 #include "special.h"
 
+#if defined(__clang__) || __GNUC__ >= 8
+  // This constructor is called before the `T` object is fully constructed, and
+  // pointers are not dereferenced anyway, so UBSan shouldn't check vptrs.
+  __attribute__((no_sanitize("vptr")))
+#endif
+
+
 void Linked_list::print(int indent) {
   Link* lk = first;
   while (lk) {
