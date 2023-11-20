@@ -73,8 +73,8 @@ int Linked_list::n_elements() {
 pcopy::pcopy(person* p, int is_collapsed) : 
 alias(p), male(p->is_male()), mother(0), father(0), 
 child(0), paternal_sibling(0), maternal_sibling(0) {
-  if (is_collapsed) p->collapsed_alias = safe_cast<pers^> this;
-  else p->alias = safe_cast<pers^> this;
+  if (is_collapsed) p->collapsed_alias = (pers*) this;
+  else p->alias = (pers*) this;
 }
 
 void pcopy::set_relatives() {
@@ -161,7 +161,7 @@ void pcopy::add_relatives_from(pcopy* p) {
       child = p2;
     }
   }
-  p->alias->collapsed_alias = safe_cast<pers^> this;
+  p->alias->collapsed_alias = (pers*) this;
 }
       
 pcopy* pcopy::get_next_relative(pcopy* p) {
@@ -242,7 +242,7 @@ void pers::collect_from(branch* oldbranch) {
   branch* thisbranch = get_owner_branch();
   pers* p = 0;
   Link* lk;
-  while ((p = safe_cast<pers^> get_next_relative(p))) {
+  while ((p = (pers*) get_next_relative(p))) {
     if (p->container_cutset()==thisbranch->container_cutset()) continue;
     if (p->get_owner_branch()!=oldbranch) continue;
 
@@ -304,8 +304,8 @@ double pers::execute(systemdata& sd) {
 				maternal_allele != allele1) continue; 
 		}
       prob = 1;
-      pers* fath = safe_cast<pers^> get_father();
-      pers* moth = safe_cast<pers^> get_mother();
+      pers* fath = (pers*) get_father();
+      pers* moth = (pers*) get_mother();
       
       if (fath)
       {
@@ -334,14 +334,14 @@ double pers::execute(systemdata& sd) {
 	 prob *= sd.set_allele(maternal_allele);
 	 set_maternal_allele = 1; 
       }
-      p = safe_cast<pers^> get_child();
+      p = (pers*) get_child();
       if (is_male()) 
 	while (p) {
 	  if (p->is_processed) 
 	    prob *= sd.inherit_prob_male(paternal_allele,
 					 maternal_allele, 
 					 p->paternal_allele);
-	  p = safe_cast<pers^> p->get_paternal_sibling();
+	  p = (pers*) p->get_paternal_sibling();
 	}
       else 
 	while (p) {
@@ -349,7 +349,7 @@ double pers::execute(systemdata& sd) {
 	    prob *= sd.inherit_prob_female(paternal_allele,
 					   maternal_allele, 
 					   p->maternal_allele);
-	  p = safe_cast<pers^> p->get_maternal_sibling();
+	  p = (pers*) p->get_maternal_sibling();
 	}
       if (prob > 0) {
 	Link* lk = container_branch()->get_next(this);
@@ -389,8 +389,8 @@ double pers::execute_cutset_part(systemdata& sd, int index) {
 		}
       
       prob = 1;
-      pers* fath = safe_cast<pers^> get_father();
-      pers* moth = safe_cast<pers^> get_mother();
+      pers* fath = (pers*) get_father();
+      pers* moth = (pers*) get_mother();
       
       if (fath)
       {
@@ -420,14 +420,14 @@ double pers::execute_cutset_part(systemdata& sd, int index) {
 	 set_maternal_allele = 1; 
       }
 
-      p = safe_cast<pers^> get_child();
+      p = (pers*) get_child();
       if (is_male()) 
 	while (p) {
 	  if (p->is_processed) 
 	    prob *= sd.inherit_prob_male(paternal_allele,
 					 maternal_allele, 
 					 p->paternal_allele);
-	  p = safe_cast<pers^> p->get_paternal_sibling();
+	  p = (pers*) p->get_paternal_sibling();
 	}
       else 
 	while (p) {
@@ -435,7 +435,7 @@ double pers::execute_cutset_part(systemdata& sd, int index) {
 	    prob *= sd.inherit_prob_female(paternal_allele,
 					   maternal_allele, 
 					   p->maternal_allele);
-	  p = safe_cast<pers^> p->get_maternal_sibling();
+	  p = (pers*) p->get_maternal_sibling();
 	}
       if (prob > 0) {
 	pers* pr = container_cutset()->get_next_pers(this);
@@ -499,7 +499,7 @@ void cutset::makeCutsets()
    branch* br = get_first_branch();
    for (i=0; i<n; i++)
    {
-      arr[i] = safe_cast<pers^> br->get_first();
+      arr[i] = (pers*) br->get_first();
       br = get_next_branch(br);
    }
    for (i=0; i<n; i++)
@@ -512,7 +512,7 @@ Link* cutset::find_relative_in_branch(branch* br) {
   pers* q;
   while (p) {
     q = 0;
-    while ((q = safe_cast<pers^> p->get_next_relative(q))) {
+    while ((q = (pers*) p->get_next_relative(q))) {
       if (q->get_owner_branch()==br) {
 	if (q->container_cutset()) return q->container_cutset();
 	else return q;
