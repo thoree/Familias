@@ -5,12 +5,6 @@
 #include "odds.h"
 #include "special.h"
 
-#if defined(__clang__) || __GNUC__ >= 8
-  // This constructor is called before the `T` object is fully constructed, and
-  // pointers are not dereferenced anyway, so UBSan shouldn't check vptrs.
-  __attribute__((no_sanitize("vptr")))
-#endif
-
 
 void Linked_list::print(int indent) {
   Link* lk = first;
@@ -70,6 +64,10 @@ int Linked_list::n_elements() {
   return result;
 }
 
+// This should directly precede the pcopy constructor
+#if defined(__clang__) || __GNUC__ >= 8
+  __attribute__((no_sanitize("vptr")))
+#endif
 pcopy::pcopy(person* p, int is_collapsed) : 
 alias(p), male(p->is_male()), mother(0), father(0), 
 child(0), paternal_sibling(0), maternal_sibling(0) {
