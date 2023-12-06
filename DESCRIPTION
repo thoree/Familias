@@ -1,7 +1,7 @@
 Type: Package
 Package: Familias
 Title: Probabilities for Pedigrees Given DNA Data
-Version: 2.6
+Version: 2.6.1
 Date: 2023-12-06
 Author: Petter Mostad, Thore Egeland, Ivar Simonsson
 Maintainer: Thore Egeland <Thore.Egeland@nmbu.no>
