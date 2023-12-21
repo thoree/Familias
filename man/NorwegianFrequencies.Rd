@@ -20,7 +20,7 @@ equal to the names of the alleles.
 \source{
 Norwegian Institute of Public Health, Department of Family Genetics: 
 \cite{Dupuy et al: Frequency data for 35 autosomal STR markers in a Norwegian, an East African, 
-and East Asian and Middle Asian population and simuation of adequate database size. Forensic Science 
+and East Asian and Middle Asian population and simulation of adequate database size. Forensic Science 
 International: Genetics Supplement Series, Volume 4, issue 1, 2013}
 }
 \examples{
