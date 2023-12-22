@@ -11,14 +11,11 @@ programmed in C++ has been available since 2012 in R. The mentioned
 website also contains references describing the implementation and
 validation.
 
-The previous cran version loaded the R library ‘paramlink’. The present
-version version does not load ‘paramlink’ as this library will not be
-maintained. The modifications needed to make ‘Familias’ independent of
-‘paramlink’ have been small. Basically an obsolete function ‘ConvertPed’
-has been removed as has some examples. For forensic pedigree analyses
-and visualisations we recommend the `pedsuite` packages: . In particular
-the package `pedFamilias` facilitates conversion of .fam files into the
-`pedsuite` format.
+No further development of this package is planned. For forensic pedigree
+analyses and visualisations we rather recommend the `pedsuite` packages,
+see <https://magnusdv.github.io/pedsuite/>. In particular, the package
+`pedFamilias` facilitates conversion of .fam files into the `pedsuite`
+format.
 
 ## Installation
 
