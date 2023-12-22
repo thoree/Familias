@@ -42,7 +42,7 @@ ped3 <- FamiliasPedigree(id = c(persons, "TF", "gf", "gm"),
                          dadid = c(NA, "TF", "gf", "gf", NA, NA), 
                          momid = c(NA, "mother", "gm", "gm", NA, NA), 
                          sex = c("female", "female", "male", "male", "male", "female"))
-op = par(mfrow = c(1,3))
+op <- par(mfrow = c(1,3))
 plot(ped1); title("ped1: AF is father")
 plot(ped2); title("ped2: AF is unrelated")
 plot(ped3); title("ped3: AF is uncle")

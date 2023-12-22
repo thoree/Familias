@@ -46,12 +46,12 @@ of the alleles not observed in the data.
 }
 }
 \value{
-\item{posterior}{probabilities for each pedigree.}
-\item{prior}{prior returned for convenience and backward compatibility.}
+\item{posterior}{Probabilities for each pedigree.}
+\item{prior}{Prior returned for convenience and backward compatibility.}
 \item{LR}{Likelihood ratios using the pedigree indicated with the ref parameter (default value 1) as basis.}
 \item{LRperMarker}{Likelihood ratios per marker using the pedigree indicated with the ref parameter (default value 1) as basis.}
-\item{likelihoods}{for each pedigree.}
-\item{likelihoodsPerSystem}{likelihoods for each locus and each pedigree.}
+\item{likelihoods}{For each pedigree.}
+\item{likelihoodsPerSystem}{Likelihoods for each locus and each pedigree.}
 }
 
 \author{
@@ -82,7 +82,7 @@ ped3 <- FamiliasPedigree(id = c(persons, "TF", "gf", "gm"),
                          dadid = c(NA, "TF", "gf", "gf", NA, NA), 
                          momid = c(NA, "mother", "gm", "gm", NA, NA), 
                          sex = c("female", "female", "male", "male", "male", "female"))
-op = par(mfrow = c(1,3))
+op <- par(mfrow = c(1,3))
 plot(ped1); title("ped1: AF is father")
 plot(ped2); title("ped2: AF is unrelated")
 plot(ped3); title("ped3: AF is uncle")
@@ -90,7 +90,7 @@ par(op)
 
 mypedigrees <- list(isFather = ped1, unrelated = ped2, isUncle = ped3)
 
-locus1 <- FamiliasLocus(frequencies=c(0.1, 0.2, 0.3, 0.4), 
+locus1 <- FamiliasLocus(frequencies = c(0.1, 0.2, 0.3, 0.4), 
                         allelenames = c("A", "B", "C", "D"), 
                         name = "locus1")
 locus2 <- FamiliasLocus(c(0.2, 0.3, 0.5), 
@@ -188,7 +188,7 @@ stopifnot(all.equal(pr_ped1_HW, pr_ped2_HW))
 stopifnot(all.equal(pr_ped1_HW, as.numeric(f["A"]^2)))
 stopifnot(all.equal(pr_ped2_HW, as.numeric(f["A"]^2)))
 
-# if Fst>0, then ped1 and ped2 are not equivalent
+# if Fst > 0, then ped1 and ped2 are not equivalent
 Fst <- 0.03
 
 pr_ped1_Fst <- FamiliasPosterior(list(ped1), locus1, datamatrix, kinship = Fst)$likelihoods
@@ -205,8 +205,8 @@ stopifnot(all.equal(pr_ped1_Fst, pr_ped1_Fst_manual))
 # computing Pr(son=A,A|ped2) with subpopulation correction and mutations
 # requires an explicit sum over the two parental alleles
 
-pr_AA <- as.numeric(f["A"]*Fst + f["A"]^2 * (1-Fst))
-pr_AB <- 2 * as.numeric(f["A"]*f["B"] * (1-Fst))
+pr_AA <- as.numeric(f["A"] * Fst + f["A"]^2 * (1-Fst))
+pr_AB <- 2 * as.numeric(f["A"] *f ["B"] * (1-Fst))
 pr_BB <- as.numeric(f["B"]*Fst + f["B"]^2 * (1-Fst))
 
 M <- locus1$maleMutationMatrix
@@ -215,7 +215,7 @@ pr_AA_given_AA <- M["A","A"]^2
 pr_AA_given_AB <- M["A","A"] * M["B","A"]
 pr_AA_given_BB <- M["B","A"]^2
 
-pr_ped2_Fst_manual <- pr_AA*pr_AA_given_AA +pr_AB*pr_AA_given_AB + pr_BB*pr_AA_given_BB
+pr_ped2_Fst_manual <- pr_AA*pr_AA_given_AA + pr_AB*pr_AA_given_AB + pr_BB*pr_AA_given_BB
 
 stopifnot(all.equal(pr_ped2_Fst, pr_ped2_Fst_manual))
 

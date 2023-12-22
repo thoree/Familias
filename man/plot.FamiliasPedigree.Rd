@@ -13,7 +13,7 @@ so that each person has either zero or two parents within the pedigree.
 }
 \arguments{
   \item{x}{
-An object of class FamiliasPedigree,
+An object of class FamiliasPedigree.
 }
   \item{y}{
 Not used in this printing function.
