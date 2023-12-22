@@ -10,24 +10,26 @@ The input is checked and if no errors are found a list with class \code{Familias
 the information.
 }
 \usage{
-FamiliasLocus(frequencies, allelenames, name, 
-			   MutationModel = "Stepwise", 
-                           MutationRate  = 0, 
-                           MutationRange = 0.5, 
-                           MutationRate2 = 0, 
-			   MutationMatrix, 
-			   Stabilization = "None", 
-			   MaxStabilizedMutrate = 1, 
-			   femaleMutationModel, 
-			   femaleMutationRate, 
-			   femaleMutationRange, 
-			   femaleMutationRate2, 
-			   femaleMutationMatrix, 
-			   maleMutationModel, 
-			   maleMutationRate, 
-			   maleMutationRange, 
-			   maleMutationRate2, 
-			   maleMutationMatrix)
+FamiliasLocus(frequencies, 
+              allelenames, 
+              name, 
+              MutationModel = "Stepwise", 
+              MutationRate  = 0, 
+              MutationRange = 0.5, 
+              MutationRate2 = 0, 
+              MutationMatrix, 
+              Stabilization = "None", 
+              MaxStabilizedMutrate = 1, 
+              femaleMutationModel, 
+              femaleMutationRate, 
+              femaleMutationRange, 
+              femaleMutationRate2, 
+              femaleMutationMatrix, 
+              maleMutationModel, 
+              maleMutationRate, 
+              maleMutationRange, 
+              maleMutationRate2, 
+              maleMutationMatrix)
 }
 
 \arguments{
@@ -41,7 +43,7 @@ be non-missing, and new mutation matrices will be constructed based on these. If
 mutation matrices will be produced based on the mutation matrices of the old object. 
 }
   \item{allelenames}{
-Names of the alleles, like \code{15} or 'A'. Note that thel last allele may be called 'Silent' (or 'silent'). 
+Names of the alleles, like \code{15} or 'A'. Note that the last allele may be called 'Silent' (or 'silent'). 
 It is then treated as a silent allele in subsequent likelihood calculations. The default is to use the names attribute of 
 the frequencies, if it exists; otherwise the default is to use consecutive integers, starting at 1.
 Note that if the 'Stepwise' mutation model is used, allele names (except for a silent allele) must be integers, 
@@ -123,7 +125,7 @@ indicating the number of sequence repetitions of an STR marker, or decimal numbe
 indicating a microvariant. Mutations are then divided into two types: Those that 
 add or subtract an integer to the allele, and those that add or subtract some fractional amount. 
 The rate of these two types of mutations are given separately as MutationRate and MutationRate2, respectively. 
-Relative probabilities of different mutaitons of the first type are specified using the MutationRange parameter. 
+Relative probabilities of different mutatitons of the first type are specified using the MutationRange parameter. 
 The model with only integer alleles is referred to as 'Probability decreasing with range (equal)' in Familias 2.0, 
 while the more general model is called 'Extended stepwise' in Familias 3.0. 
 Note that the probability of mutations to or from silent alleles is set to zero in all models except the 'Custom' model. 
@@ -173,7 +175,8 @@ femaleMutationRate = 0.001, maleMutationRate = 0.005)
 
 #Mutation matrices specified directly 
 MM <- matrix(c(0.99, 0.005, 0.003, 0.002, 0.005, 0.99, 0.005, 0, 
-0, 0.005, 0.99, 0.005, 0.002, 0.003, 0.005, 0.99), 4, 4, byrow = TRUE)
+               0, 0.005, 0.99, 0.005, 0.002, 0.003, 0.005, 0.99), 
+             ncol = 4, nrow = 4, byrow = TRUE)
 FamiliasLocus(frequencies = c(0.1, 0.2, 0.3, 0.4), 
 allelenames= c("08", "09", "10", "11"), name = "locus1", 
 MutationModel = "Custom", MutationMatrix = MM)

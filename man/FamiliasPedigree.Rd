@@ -5,11 +5,12 @@
 Creates an object storing a pedigree  
 }
 \description{
-Creates and stores an object containing a pedigree in much the same way as the 'pedigree' 
-function of the 'kinship2' package. It is checked that the input represents a correct pedigree. 
-The main differences is that a person is allowed to have one parent present and one absent in the pedigree. 
-Another difference is that no disease parameters are included. 
-The result is an object with class \code{FamiliasPedigree}.
+Creates and stores an object containing a pedigree in much the same way as the 
+'pedigree' function of the 'kinship2' package. It is checked that the input 
+represents a correct pedigree. The main differences is that a person is allowed
+to have one parent present and one absent in the pedigree. Another difference is
+that no disease parameters are included. The result is an object with class 
+\code{FamiliasPedigree}.
 }
 \usage{
 FamiliasPedigree(id, dadid, momid, sex)
@@ -20,16 +21,18 @@ FamiliasPedigree(id, dadid, momid, sex)
 A vector containing unique identifiers of all individuals in the pedigree.
 }
   \item{dadid}{
-Indicates the fathers of individuals. The vector must have the same length as the id vector and contain either 
-values from it, indicating that the individual with this position in the id vector has the given father, or NA. 
+Indicates the fathers of individuals. The vector must have the same length as 
+the id vector and contain either values from it, indicating that the individual
+with this position in the id vector has the given father, or NA. 
 }
   \item{momid}{
-Indicates the mothers of individuals. The vector must have the same length as the id vector and contain either 
-values from it, indicating that the individual with this position in the id vector has the given mother, or NA. 
+Indicates the mothers of individuals. The vector must have the same length as 
+the id vector and contain either values from it, indicating that the individual
+with this position in the id vector has the given mother, or NA. 
 }
   \item{sex}{
-A vector of the same length as the id vector, indicating the gender of individuals. 
-Values must be either "female" or "male". 
+A vector of the same length as the id vector, indicating the gender of 
+individuals. Values must be either "female" or "male". 
 }
 }
 \details{
@@ -45,8 +48,10 @@ mutation model. The \code{FamiliasPosterior} and \code{FamiliasPrior} functions 
 \value{
 A list of class \code{FamiliasPedigree} containing 
 \item{id}{The same vector as the id input.}
-\item{findex}{A vector of indices of fathers of persons. Zero indicates that the person has no father in the pedigree.}
-\item{mindex}{A vector of indices of mothers of persons. Zero indicates that the person has no mother in the pedigree.}
+\item{findex}{A vector of indices of fathers of persons. Zero indicates that the
+person has no father in the pedigree.}
+\item{mindex}{A vector of indices of mothers of persons. Zero indicates that the
+person has no mother in the pedigree.}
 \item{sex}{The same vector as the sex input.}
 }
 \author{

@@ -3,8 +3,10 @@
 \title{Plotting function for FamiliasPedigree objects
 }
 \description{
-The function piggybacks the plot function for pedigree objects from the kinship2 package to create a plotting function for FamiliasPedigree objects. 
-Before conversion to a pedigree object, additional parents are added to the pedigree so that each person has either zero or two parents within the pedigree. 
+The function piggybacks the plot function for pedigree objects from the kinship2
+package to create a plotting function for FamiliasPedigree objects. Before 
+conversion to a pedigree object, additional parents are added to the pedigree 
+so that each person has either zero or two parents within the pedigree. 
 }
 \usage{
 \method{plot}{FamiliasPedigree}(x, y, ...)
@@ -17,13 +19,13 @@ An object of class FamiliasPedigree,
 Not used in this printing function.
 }
   \item{\dots}{
-Other arguments are transferred to the plot.pedigree function of the kinship2 package.  
+Other arguments transferred to `kinship2::plot.pedigree()`.  
 }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
-Graphical parameters used in the plot.pedigree function may be input via the 
-plot.FamiliasPedigree function. 
+Graphical parameters used in `kinship2::plot.pedigree()` may be input via 
+`plot.FamiliasPedigree()`. 
 }
 \value{
 %%  ~Describe the value returned
@@ -34,13 +36,14 @@ plot.FamiliasPedigree function.
 A plot is produced. 
 }
 \author{
-%%  ~~who you are~~
 Petter Mostad mostad@chalmers.se 
 }
-\seealso{\url{https://github.com/magnusdv/pedtools} }
+
 \examples{
-ped <- FamiliasPedigree(id = c("child", "AF"), momid = c(NA, NA), 
-       dadid = c("AF", NA), sex = c("male", "male"))
+ped <- FamiliasPedigree(id = c("child", "AF"), 
+                        momid = c(NA, NA), 
+                        dadid = c("AF", NA), 
+                        sex = c("male", "male"))
 plot(ped)
 dev.new()
 plot(ped, symbolsize = 2, cex = 2, family = "mono")

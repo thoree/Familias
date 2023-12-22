@@ -4,12 +4,12 @@
 Calculates posterior probabilities and likelihoods for pedigrees
 }
 \description{
-The calculations of the windows version of Familias 2.0
-are made available in an R environment.
+The calculations of the windows version of Familias 2.0 are made available in 
+an R environment.
 }
 \usage{
-FamiliasPosterior(pedigrees, loci, datamatrix, prior, ref = 1, 
-kinship = 0, simplifyMutations = FALSE)
+FamiliasPosterior(pedigrees, loci, datamatrix, prior, ref = 1, kinship = 0, 
+                  simplifyMutations = FALSE)
 }
 
 \arguments{
@@ -55,7 +55,7 @@ of the alleles not observed in the data.
 }
 
 \author{
-Petter Mostad <mostad@chalmers.se> and Thore Egeland <Thore.Egeland@nmbu.com>
+Petter Mostad <mostad@chalmers.se> and Thore Egeland <Thore.Egeland@nmbu.com>.
 }
 
 \examples{
@@ -64,35 +64,48 @@ Petter Mostad <mostad@chalmers.se> and Thore Egeland <Thore.Egeland@nmbu.com>
 #Three pedigrees are defined, with "mother" being the mother of "daughter" 
 #in all cases. "AF" may be the father (ped1), unrelated (ped1) or
 #uncle (ped3). The posterior probabilities for the pedigrees are calculated 
-#and likelihoods are also given so that
-#likelihood ratios can be computed. Compared to the windows version of Familias 2.0, 
-#it is easy to plot pedigrees and define arbitrary priors for the three alternative pedigrees.
-#The below implementation uses the R package kinship2 to define and plot pedigrees
+#and likelihoods are also given so that likelihood ratios can be computed. 
+#Compared to the windows version of Familias it is easy to plot pedigrees and 
+#define arbitrary priors for the three alternative pedigrees.
+#The implementation uses the R package kinship2 to define and plot pedigrees.
 
 persons <- c("mother", "daughter", "AF")
-ped1 <- FamiliasPedigree(id = persons, dadid=c(NA, "AF", NA), momid=c(NA, "mother", NA), 
-sex=c("female", "female", "male"))
-ped2 <- FamiliasPedigree(id = c(persons, "TF"), dadid=c(NA, "TF", NA, NA), 
-momid=c(NA, "mother", NA, NA), 
-sex=c("female", "female", "male", "male"))
-ped3 <- FamiliasPedigree(id = c(persons, "TF", "gf", "gm"), 
-dadid = c(NA, "TF", "gf", "gf", NA, NA), 
-momid = c(NA, "mother", "gm", "gm", NA, NA), 
-sex = c("female", "female", "male", "male", "male", "female"))
-par(mfrow = c(3,1))
-plot(ped1);title("ped1, i.e., AF is father")
-plot(ped2);title("ped2, i.e., AF is unrelated")
-plot(ped3);title("ped3, i.e., AF is uncle")
-par(mfrow = c(1,1))
+ped1 <- FamiliasPedigree(id = persons, 
+                         dadid = c(NA, "AF", NA), 
+                         momid = c(NA, "mother", NA), 
+                         sex = c("female", "female", "male"))
+ped2 <- FamiliasPedigree(id = c(persons, "TF"), 
+                         dadid = c(NA, "TF", NA, NA), 
+                         momid = c(NA, "mother", NA, NA), 
+                         sex = c("female", "female", "male", "male"))
+ped3 <- FamiliasPedigree(id = c(persons, "TF", "gf", "gm"),
+                         dadid = c(NA, "TF", "gf", "gf", NA, NA), 
+                         momid = c(NA, "mother", "gm", "gm", NA, NA), 
+                         sex = c("female", "female", "male", "male", "male", "female"))
+op = par(mfrow = c(1,3))
+plot(ped1); title("ped1: AF is father")
+plot(ped2); title("ped2: AF is unrelated")
+plot(ped3); title("ped3: AF is uncle")
+par(op)
+
 mypedigrees <- list(isFather = ped1, unrelated = ped2, isUncle = ped3)
+
 locus1 <- FamiliasLocus(frequencies=c(0.1, 0.2, 0.3, 0.4), 
-allelenames = c("A", "B", "C", "D"), name = "locus1")
-locus2 <- FamiliasLocus(c(0.2, 0.3, 0.5), c(17, 18, 19), "loc2", femaleMutationRate = 0.05)
+                        allelenames = c("A", "B", "C", "D"), 
+                        name = "locus1")
+locus2 <- FamiliasLocus(c(0.2, 0.3, 0.5), 
+                        c(17, 18, 19), 
+                        "loc2", 
+                        femaleMutationRate = 0.05)
 myloci <- list(locus1, locus2)
-datamatrix <- data.frame(locus1.1 = c("A", "A", "A"), locus1.2 =c ("B", "B", "C"), 
-locus2.1=c(17, 19, 19), locus2.2=c(18, 18, 18))
+
+datamatrix <- data.frame(locus1.1 = c("A", "A", "A"), 
+                         locus1.2 = c ("B", "B", "C"), 
+                         locus2.1 = c(17, 19, 19), 
+                         locus2.2 = c(18, 18, 18))
 rownames(datamatrix) <- persons
-result <- FamiliasPosterior(mypedigrees, myloci, datamatrix,ref = 2)
+
+result <- FamiliasPosterior(mypedigrees, myloci, datamatrix, ref = 2)
 
 
 
@@ -102,35 +115,40 @@ sex <- c("male", "male")
 ped1 <- FamiliasPedigree(id = persons, dadid = c(NA, NA), momid = c(NA, NA), sex = sex)
 ped2 <- FamiliasPedigree(id = persons, dadid = c("AF", NA), momid = c(NA, NA), sex = sex)
 mypedigrees <- list(unrelated = ped1, isFather = ped2)
+
 locus1 <- FamiliasLocus(c(0.1, 0.2, 0.3, 0.4), c("A", "B", "C", "D"), "locus1", 
-   maleMutationModel = "Equal", maleMutationRate = 0.005)
+                        maleMutationModel = "Equal", maleMutationRate = 0.005)
 locus2 <- FamiliasLocus(c(0.2, 0.3, 0.5), c(17, 18, 19), "locus2", 
-   maleMutationModel = "Equal", maleMutationRate = 0.005) 
+                        maleMutationModel = "Equal", maleMutationRate = 0.005) 
 myloci <- list(locus1, locus2)
+
 datamatrix <- data.frame(locus1.1 = c("A", "A"), locus1.2 = c("B", "B"), 
-locus2.1 = c(17, 19), locus2.2 = c(18, 18))
+                         locus2.1 = c(17, 19),   locus2.2 = c(18, 18))
 rownames(datamatrix) <- persons
 result <- FamiliasPosterior(mypedigrees, myloci, datamatrix)
 
 #Example 3: User-specified mutation matrices
 persons <- c("son", "mother", "AF")
 sex <- c("male", "female", "male")
-ped1 <- FamiliasPedigree(id=persons, dadid = c(NA, NA, NA), momid = c("mother", NA, NA), sex=sex)
-ped2 <- FamiliasPedigree(id=persons, dadid = c("AF", NA, NA), momid = c("mother", NA, NA), sex=sex)
+ped1 <- FamiliasPedigree(id = persons, dadid = c(NA, NA, NA), 
+                         momid = c("mother", NA, NA), sex = sex)
+ped2 <- FamiliasPedigree(id = persons, dadid = c("AF", NA, NA), 
+                         momid = c("mother", NA, NA), sex = sex)
 mypedigrees <- list(unrelated = ped1, isFather = ped2)
+
+mut = matrix(c(0.99, 0.005, 0.003, 0.002, 
+               0.004, 0.99, 0.004, 0.002, 
+               0.002, 0.004, 0.99, 0.004, 
+               0.002, 0.003, 0.005, 0.99), 
+             4, 4, byrow = TRUE)
 locus1 <- FamiliasLocus(c(0.1, 0.2, 0.3, 0.4), c("A", "B", "C", "D"), "locus1", 
-   maleMutationModel = "Custom", maleMutationMatrix = matrix(
-   c(0.99, 0.005, 0.003, 0.002, 
-     0.004, 0.99, 0.004, 0.002, 
-     0.002, 0.004, 0.99, 0.004, 
-     0.002, 0.003, 0.005, 0.99), 
-   4, 4, byrow = TRUE), femaleMutationModel = "Custom", femaleMutationMatrix = matrix(
-   c(0.99, 0.005, 0.003, 0.002, 
-     0.004, 0.99, 0.004, 0.002, 
-     0.002, 0.004, 0.99, 0.004, 
-     0.002, 0.003, 0.005, 0.99), 
-   4, 4, byrow = TRUE))
-datamatrix <- data.frame(locus1.1 = c("A", "A", "C"), locus1.2 = c("B", "A", "C"))
+                        maleMutationModel = "Custom", 
+                        maleMutationMatrix = mut, 
+                        femaleMutationModel = "Custom", 
+                        femaleMutationMatrix = mut)
+   
+datamatrix <- data.frame(locus1.1 = c("A", "A", "C"), 
+                         locus1.2 = c("B", "A", "C"))
 rownames(datamatrix) <- persons
 result <- FamiliasPosterior(mypedigrees, locus1, datamatrix)
 
@@ -138,21 +156,21 @@ result <- FamiliasPosterior(mypedigrees, locus1, datamatrix)
 #when subpopulation correction is used even if the mutation matrix is stationary
 
 # ped1 is son by himself
-ped1 <- FamiliasPedigree(id="son", 
+ped1 <- FamiliasPedigree(id = "son", 
                          dadid = c(NA), 
                          momid = c(NA), 
-                         sex="male")
+                         sex = "male")
 
 # ped2 describes son with parents
 persons <- c("son", "mother", "AF")
 sex <- c("male", "female", "male")
-ped2 <- FamiliasPedigree(id=persons, 
+ped2 <- FamiliasPedigree(id = persons, 
                          dadid = c("AF", NA, NA), 
                          momid = c("mother", NA, NA), 
-                         sex=sex)
+                         sex = sex)
 
 # only the son is typed
-datamatrix <- matrix(c("A","A"), ncol=2)
+datamatrix <- matrix(c("A", "A"), ncol = 2)
 rownames(datamatrix) <- "son"
 
 f <- setNames(c(0.3, 0.7), c("A", "B"))
