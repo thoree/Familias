@@ -9,7 +9,6 @@ likelihoods and probabilities used to infer family relationships based
 on autosomal marker data. The core code of the Windows program
 programmed in C++ has been available since 2012 in R. The implementation
 is described in Egeland, Mostad and Olaisen, *Sci Justice*, **1997**,
-<doi:10.1016/S1355-0306(97)72202-0>
 [doi:10.1016/S1355-0306(97)72202-0](https://doi:10.1016/S1355-0306(97)72202-0)
 and Simonsson and Mostad, *Forensic Sci Int Genet*, **2016**,
 [doi:10.1016/j.fsigen.2016.04.005](https://doi:10.1016/j.fsigen.2016.04.005).
