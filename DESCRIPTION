@@ -1,9 +1,21 @@
 Type: Package
 Package: Familias
 Title: Probabilities for Pedigrees Given DNA Data
-Version: 2.6.1
-Author: Petter Mostad, Thore Egeland, Ivar Simonsson
-Maintainer: Thore Egeland <Thore.Egeland@nmbu.no>
+Version: 2.6.2
+Authors@R: c(
+    person(given = "Petter",
+           family = "Mostad",
+           role = "aut",
+           email = "mostad@chalmers.se"),
+    person(given = "Thore",
+           family = "Egeland",
+           role = c("aut", "cre"),
+           email = "Thore.Egeland@nmbu.no"),
+    person(given = "Ivar",
+           family = "Simonsson",
+           role = "aut",
+           email = "simonssi@chalmers.se")
+           )
 Description: An interface to the core 'Familias' functions which are
     programmed in C++. The implementation is described in Egeland, Mostad and Olaisen
     (1997) <doi:10.1016/S1355-0306(97)72202-0> and Simonsson and Mostad

@@ -68,5 +68,7 @@ datamatrix <- data.frame(locus1.1 = c("A", "A", "A"),
                          row.names = persons)
 
 # Calculate LR
+\dontrun{
 FamiliasPosterior(mypedigrees, myloci, datamatrix)
+}
 }

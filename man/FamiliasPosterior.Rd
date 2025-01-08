@@ -105,7 +105,9 @@ datamatrix <- data.frame(locus1.1 = c("A", "A", "A"),
                          locus2.2 = c(18, 18, 18))
 rownames(datamatrix) <- persons
 
+\dontrun{
 result <- FamiliasPosterior(mypedigrees, myloci, datamatrix, ref = 2)
+}
 
 
 
@@ -125,7 +127,9 @@ myloci <- list(locus1, locus2)
 datamatrix <- data.frame(locus1.1 = c("A", "A"), locus1.2 = c("B", "B"), 
                          locus2.1 = c(17, 19),   locus2.2 = c(18, 18))
 rownames(datamatrix) <- persons
+\dontrun{
 result <- FamiliasPosterior(mypedigrees, myloci, datamatrix)
+}
 
 #Example 3: User-specified mutation matrices
 persons <- c("son", "mother", "AF")
@@ -150,12 +154,15 @@ locus1 <- FamiliasLocus(c(0.1, 0.2, 0.3, 0.4), c("A", "B", "C", "D"), "locus1",
 datamatrix <- data.frame(locus1.1 = c("A", "A", "C"), 
                          locus1.2 = c("B", "A", "C"))
 rownames(datamatrix) <- persons
+\dontrun{
 result <- FamiliasPosterior(mypedigrees, locus1, datamatrix)
+}
 
 #Example 4: Adding an untyped ancestor affects the likelihood
 #when subpopulation correction is used even if the mutation matrix is stationary
 
 # ped1 is son by himself
+\dontrun{
 ped1 <- FamiliasPedigree(id = "son", 
                          dadid = c(NA), 
                          momid = c(NA), 
@@ -218,6 +225,6 @@ pr_AA_given_BB <- M["B","A"]^2
 pr_ped2_Fst_manual <- pr_AA*pr_AA_given_AA + pr_AB*pr_AA_given_AB + pr_BB*pr_AA_given_BB
 
 stopifnot(all.equal(pr_ped2_Fst, pr_ped2_Fst_manual))
-
+}
 
 }

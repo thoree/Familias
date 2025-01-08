@@ -1,7 +1,10 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Familias 2.6.1
+# Familias 2.6.2
+
+Only some examples have been changed in version 2.6.2 compared to
+version 2.6.1.
 
 Familias has existed since 2000 as a Windows program and can be
 downloaded from <https://familias.no>. The program calculates
