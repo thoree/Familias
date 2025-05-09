@@ -508,13 +508,13 @@ void FamInterface::AddAlleleSystem(int nAll,
    nAlleles = newAlleles; 
    internalAlleleName = newintAll; 
    internalSystemName[nSystems] = new char[100]; 
-   snprintf(internalSystemName[nSystems], 256, "%d", ++counter);
+   snprintf(internalSystemName[nSystems], 100, "%d", ++counter);
    nAlleles[nSystems] = nAll; 
    internalAlleleName[nSystems] = new char*[nAll]; 
    for (i=0; i<nAll; i++)
    {
       internalAlleleName[nSystems][i] = new char[100]; 
-      snprintf(internalAlleleName[nSystems][i], 256, "%d", ++counter);
+      snprintf(internalAlleleName[nSystems][i], 100, "%d", ++counter);
    }
    
    int paterError = 0; 
@@ -701,7 +701,7 @@ void FamInterface::EditAlleleSystem(int indexSystem,
       if (newAlls[i])
       {
 	 internalAlleleName[indexSystem][i] = new char[100]; 
-	 snprintf(internalAlleleName[indexSystem][i], 256, "%d", ++counter);
+	 snprintf(internalAlleleName[indexSystem][i], 100, "%d", ++counter);
       }
    nAlleles[indexSystem] = nAll; 
    delete[] newAlls; 
