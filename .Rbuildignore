@@ -1,6 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-commands.R
 README.Rmd
 README_cache
 ^data-raw$
@@ -9,4 +8,5 @@ README_cache
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
 ^revdep$
+^notes$
 
