@@ -2,7 +2,8 @@
 
 #include <cstdlib>
 #include <cstring>
-#include <sstream> 
+#include <sstream>
+#include <string> 
 
 #include "special.h"
 #include "table.h"
@@ -50,17 +51,12 @@ char* my_place_in_string(double d) {
     //	ost<<d;
     //	ost<<'X';
     //}
-    stringstream ss (stringstream::in | stringstream::out); 
-    ss << d; 
-    ss >> result; 
-    int length = 0;
-
-
-    //    while (result[length]!='X') length++;
-    length = 15; 
-
-
-    result[length] = '\0';
+    stringstream ss (stringstream::in | stringstream::out);
+    ss << d;
+    std::string temp;
+    ss >> temp;
+    strncpy(result, temp.c_str(), 15);
+    result[15] = '\0';
     return result;
 }
 
