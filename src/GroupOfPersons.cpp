@@ -1,6 +1,8 @@
 /* $Id: GroupOfPersons.C,v 1.10 2000/08/07 07:44:07 mostad Exp $ */
 
 #include <cstdio>
+#include <cstring>
+#include <string>
 
 #include "special.h"
 #include "GroupOfPersons.h"
@@ -56,22 +58,31 @@ void GroupOfPersons::readData(ifstream& is)
    namesWomen = new char*[nWomen]; 
    for (i=0; i<nWomen; i++)
    {
-      namesWomen[i] = new char[100]; 
-      is>>namesWomen[i];    
+      namesWomen[i] = new char[100];
+      std::string temp;
+      is >> temp;
+      strncpy(namesWomen[i], temp.c_str(), 99);
+      namesWomen[i][99] = '\0';
    }
    is>>nMen; 
    namesMen = new char*[nMen]; 
    for (i=0; i<nMen; i++)
    {
-      namesMen[i] = new char[100]; 
-      is>>namesMen[i]; 
+      namesMen[i] = new char[100];
+      std::string temp;
+      is >> temp;
+      strncpy(namesMen[i], temp.c_str(), 99);
+      namesMen[i][99] = '\0';
    }
    is>>nChildren; 
    namesChildren = new char*[nChildren]; 
    for (i=0; i<nChildren; i++)
    {
-      namesChildren[i] = new char[100]; 
-      is>>namesChildren[i]; 
+      namesChildren[i] = new char[100];
+      std::string temp;
+      is >> temp;
+      strncpy(namesChildren[i], temp.c_str(), 99);
+      namesChildren[i][99] = '\0';
    }
    is>>nExtraWomen; 
    is>>nExtraMen; 
