@@ -1,7 +1,7 @@
 Type: Package
 Package: Familias
 Title: Probabilities for Pedigrees Given DNA Data
-Version: 2.6.3
+Version: 2.6.4
 Authors@R: c(
     person(given = "Petter",
            family = "Mostad",
@@ -9,7 +9,7 @@ Authors@R: c(
            email = "mostad@chalmers.se"),
     person(given = "Thore",
            family = "Egeland",
-           role = c("aut", "cre"),
+           role = "aut",
            email = "Thore.Egeland@nmbu.no"),
     person(given = "Franco",
            family = "Marsico",
